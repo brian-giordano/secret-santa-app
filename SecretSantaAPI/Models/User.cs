@@ -4,15 +4,21 @@ namespace SecretSantaAPI.Models
 {
     public class User
     {
+        public User()
+        {
+            WishList = new HashSet<Gift>();
+            Assignments = new HashSet<Assignment>();
+        }
+
         [Key]
         public int UserId { get; set; } // Primary key
 
         [Required]
         [MaxLength(100)]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         [EmailAddress]
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
 
         // Navigation property for related Gift objects
         public virtual ICollection<Gift> WishList { get; set; }
