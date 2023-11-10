@@ -10,6 +10,7 @@ namespace SecretSantaAPI.Models
         public int GiftId { get; set; }
 
         [Required]
+        [MaxLength(200)]
         public string Title { get; set; } = string.Empty; // gift name or title
 
         public string? Description { get; set; } // optional description of the gift
@@ -19,7 +20,8 @@ namespace SecretSantaAPI.Models
 
         // ForeignKey relates Gift to User - which user is sending the gift.
         //This is helpful when you retrieve a Gift from the database and want to know which user sent it without requiring a separate query.
-        [ForeignKey("UserId")]
-        public User Sender { get; set; } = null!; // This is to suppress the nullable warning
+        [ForeignKey(nameof(UserId))]
+        // public User Sender { get; set; } = null!; // This is to suppress the nullable warning
+        public virtual User User { get; set; } = null!; // This is to suppress the nullable warning
     }
 }

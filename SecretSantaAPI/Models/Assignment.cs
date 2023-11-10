@@ -9,15 +9,17 @@ namespace SecretSantaAPI.Models
         [Key]
         public int AssignmentId { get; set; }
 
-        [ForeignKey("Giver")]
-        public int GiverUserId { get; set; }
+        public int GiverId { get; set; }
+
+        [ForeignKey(nameof(GiverId))]
+
         public virtual User Giver { get; set; } = null!;
 
-        [ForeignKey("Receiver")]
-        public int ReceiverUserId { get; set; }
+        [ForeignKey(nameof(ReceiverId))]
+        public int ReceiverId { get; set; }
         public virtual User Receiver { get; set; } = null!;
 
-        [ForeignKey("Gift")]
+        [ForeignKey(nameof(GiftId))]
         public int GiftId { get; set; }
         public virtual Gift Gift { get; set; } = null!;
 

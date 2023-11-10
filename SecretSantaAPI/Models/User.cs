@@ -4,11 +4,8 @@ namespace SecretSantaAPI.Models
 {
     public class User
     {
-        public User()
-        {
-            WishList = new HashSet<Gift>();
-            Assignments = new HashSet<Assignment>();
-        }
+        // Nav property to relate users to the group
+        public virtual ICollection<UserGroup> UserGroups { get; set; }
 
         [Key]
         public int UserId { get; set; } // Primary key
@@ -21,7 +18,7 @@ namespace SecretSantaAPI.Models
         public string Email { get; set; } = string.Empty;
 
         // Navigation property for related Gift objects
-        public virtual ICollection<Gift> WishList { get; set; }
+        public virtual ICollection<Gift> Gifts { get; set; }
 
         // Navigation property for Secret Santa assignments
         public virtual ICollection<Assignment> Assignments { get; set; }
@@ -30,5 +27,13 @@ namespace SecretSantaAPI.Models
         // For example, a password hash for authentication purposes
         // public byte[] PasswordHash { get; set; }
         // public byte[] PasswordSalt { get; set; }
+
+        // constructor
+        public User()
+        {
+            Gifts = new HashSet<Gift>();
+            Assignments = new HashSet<Assignment>();
+            UserGroups = new HashSet<UserGroup>();
+        }
     }
 }
